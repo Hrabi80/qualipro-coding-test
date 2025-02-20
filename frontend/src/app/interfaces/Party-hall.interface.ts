@@ -5,5 +5,5 @@ export interface PartyHall {
     name: string;
     address: string;
     city: string;
-    concerts?:[Concert]
+    //concerts?:[Concert]
 }

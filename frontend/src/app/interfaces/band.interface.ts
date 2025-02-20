@@ -10,5 +10,5 @@ export interface Band {
     members: number;
     founders:string;
     about:string;
-    concerts?: [Concert];
+  //  concerts?: [Concert];
   }

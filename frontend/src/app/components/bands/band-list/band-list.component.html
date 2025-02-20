@@ -1,1 +1,28 @@
-<p>band-list works!</p>
+<table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+        <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Origine</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fondé le</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de séparation</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Membres</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fondateurs</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Présentation</th>
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let band of bands">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ band.id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.origin }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.city }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.founded_at | date }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.separation_date ? (band.separation_date | date) : 'N/A' }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.members }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.founders }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ band.about }}</td>
+        </tr>
+    </tbody>
+</table>
