@@ -16,4 +16,26 @@ export class HallListComponent {
   showModal = false;
   selectedHall: PartyHall | null = null;
   constructor(private service: HallsService) {}
+
+  ngOnInit() {
+      this.getHalls();
+    }
+  getHalls(){
+    this.service.getHalls().subscribe((halls: PartyHall[]) => {
+      this.halls = halls;
+    });
+  }
+  openModal(hall: PartyHall | null = null) {
+      this.selectedHall = hall;
+      this.showModal = true;
+    }
+  
+    closeModal() {
+      this.showModal = false;
+      this.selectedHall = null;
+    }
+  
+    refreshList() {
+      this.getHalls();
+    }
 }

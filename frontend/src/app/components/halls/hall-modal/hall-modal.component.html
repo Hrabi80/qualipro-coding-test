@@ -1,1 +1,22 @@
-<p>hall-modal works!</p>
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+      <h2 class="text-lg font-bold mb-4">{{ isEditMode ? 'Modifier' : 'Ajouter' }} une salle</h2>
+      <form [formGroup]="hallForm" (ngSubmit)="submitForm()">
+        <label class="block mb-2">Nom:</label>
+        <input type="text" formControlName="name" class="w-full p-2 border rounded mb-3" required>
+  
+        <label class="block mb-2">Adress:</label>
+        <input type="text" formControlName="address" class="w-full p-2 border rounded mb-3" required>
+  
+        <label class="block mb-2">Ville:</label>
+        <input type="text" formControlName="city" class="w-full p-2 border rounded mb-3" required>
+  
+      
+        <div class="flex justify-end gap-2">
+          <button type="button" (click)="close.emit()" class="bg-gray-500 text-white px-4 py-2 rounded">Annuler</button>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">{{ isEditMode ? 'Modifier' : 'Ajouter' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

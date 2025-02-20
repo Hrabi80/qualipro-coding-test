@@ -12,9 +12,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./band-modal.component.css'],
 })
 export class BandModalComponent implements OnInit {
-  @Input() bandData: Band | null = null; // Holds band data for edit mode
-  @Output() close = new EventEmitter<void>(); // Event to close modal
-  @Output() bandSaved = new EventEmitter<void>(); // Event to notify parent
+  @Input() bandData: Band | null = null; 
+  @Output() close = new EventEmitter<void>(); 
+  @Output() bandSaved = new EventEmitter<void>();
 
   bandForm!: FormGroup;
   isEditMode = false;
@@ -42,7 +42,6 @@ export class BandModalComponent implements OnInit {
     }
 
     if (this.isEditMode && this.bandData) {
-      // Update existing band
       this.service.updateBand(this.bandData.id, this.bandForm.value).subscribe({
         next: () => {
           Swal.fire('Succès', 'Le groupe a été mis à jour !', 'success');
@@ -55,7 +54,6 @@ export class BandModalComponent implements OnInit {
         },
       });
     } else {
-      // Create new band
       this.service.createBand(this.bandForm.value).subscribe({
         next: () => {
           Swal.fire('Succès', 'Le groupe est ajouté correctement!', 'success');

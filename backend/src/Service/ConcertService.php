@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\DTO\ConcertDTO;
+use App\DTO\ConcertResponseDto;
 use App\Entity\Concert;
 use App\Entity\MusicalBand;
 use App\Entity\PartyHall;
@@ -23,14 +24,35 @@ class ConcertService
         $this->logger = $logger;
     }
 
-    /**
-     * Retrieve all concerts.
+     /**
+     * Retrieve all concerts with party hall info and band names.
      *
-     * @return Concert[]
+     * @return ConcertResponseDto[]
      */
     public function getAllConcerts(): array
     {
-        return $this->entity_manager->getRepository(Concert::class)->findAll();
+        $concerts = $this->entity_manager->getRepository(Concert::class)->findAll();
+        $concertDtos = [];
+
+        foreach ($concerts as $concert) {
+            $partyHall = $concert->getPartyHall();
+            $bands = $concert->getBands()->toArray();
+
+            $bandList = array_map(fn($band) => [
+                "id" => $band->getId(),
+                "name" => $band->getName(),
+            ], $bands);
+
+            $concertDtos[] = new ConcertResponseDto(
+                $concert->getId(),
+                $concert->getDate()->format("Y-m-d"),
+                $partyHall ? $partyHall->getId() : null,
+                $partyHall ? $partyHall->getName() : null,
+                $bandList
+            );
+        }
+
+        return $concertDtos;
     }
 
     /**

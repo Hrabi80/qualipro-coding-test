@@ -34,7 +34,7 @@ export class BandsService {
     return this.http.put<Band>(`${this.api}/${id}`, band);
   }
 
-  deleteBand(id: string): Observable<void> {
+  deleteBand(id: number|undefined): Observable<void> {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
 

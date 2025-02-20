@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DTO\ConcertDTO;
 use App\Service\ConcertService;
+use App\DTO\ConcertResponseDto;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,22 +40,7 @@ class ConcertController extends AbstractController
     public function index(): JsonResponse
     {
         $concerts = $this->concert_service->getAllConcerts();
-        $data = [];
-
-        foreach ($concerts as $concert) {
-            $data[] = [
-                "id" => $concert->getId(),
-                "date" => $concert->getDate()->format("Y-m-d"),
-                "party_hall_id" => $concert->getPartyHall()
-                    ? $concert->getPartyHall()->getId()
-                    : null,
-                "band_ids" => array_map(
-                    fn($band) => $band->getId(),
-                    $concert->getBands()->toArray()
-                ),
-            ];
-        }
-        return $this->json($data);
+        return $this->json($concerts);
     }
 
     /**

@@ -1,1 +1,29 @@
-<p>concert-list works!</p>
+
+<button (click)="openModal()" class="mb-4 bg-green-500 text-white px-4 py-2 rounded">Ajouter une salle</button>
+
+<app-concert-modal *ngIf="showModal" [consertData]="selectedConsert" (close)="closeModal()" (bandSaved)="refreshList()"></app-concert-modal>
+<table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+        <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">date</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom de la salle</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">nom des groupes</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let consert of concerts">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ consert.id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ consert.date | date}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ consert.party_hall_name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <!-- {{ consert.bands ? consert.bands.map(band => band.name).join(', ') : '' }} -->
+            </td>
+            <td>
+                <!-- <button (click)="openModal(consert)" class="bg-blue-500 text-white px-2 py-1 rounded">Modifier</button> -->
+              </td>
+        </tr>
+    </tbody>
+</table>
