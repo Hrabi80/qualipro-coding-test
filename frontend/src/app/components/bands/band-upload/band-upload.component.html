@@ -1,1 +1,52 @@
-<p>band-upload works!</p>
+<div class="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-lg font-semibold text-gray-700 text-center mb-4">
+      Importer un fichier Excel
+    </h2>
+  
+    <!-- Drag & Drop File Upload -->
+    <label
+      for="file-upload"
+      class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition"
+    >
+      <div class="flex flex-col items-center">
+        <svg
+          class="w-10 h-10 text-gray-500 mb-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16V12M17 16V12M3 12l9-9m0 0l9 9m-9-9v18"
+          ></path>
+        </svg>
+        <p class="text-sm text-gray-500">Glissez-déposez un fichier ici</p>
+        <p class="text-xs text-gray-400">ou cliquez pour sélectionner un fichier</p>
+      </div>
+      <input
+        id="file-upload"
+        type="file"
+        accept=".xlsx, .xls"
+        class="hidden"
+        (change)="onFileSelected($event)"
+      />
+    </label>
+  
+    <!-- File Name Display -->
+    <p *ngIf="selectedFile" class="mt-2 text-sm text-gray-600">
+      📄 {{ selectedFile.name }}
+    </p>
+  
+    <!-- Upload Button -->
+    <button
+      (click)="uploadFile()"
+      [disabled]="isUploading"
+      class="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+    >
+      {{ isUploading ? 'Importation en cours...' : 'Importer' }}
+    </button>
+  </div>
+  

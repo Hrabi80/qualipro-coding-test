@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class BandsService {
   private readonly api = `${environment.api_url}/bands`;
-
+  private readonly upload_api = `${environment.api_url}/import/bands`;
   constructor(private http: HttpClient) { }
 
   private headers = new HttpHeaders({
@@ -30,11 +30,17 @@ export class BandsService {
     return this.http.post<Band>(this.api, band);
   }
 
-  updateBand(id: string, band: Band): Observable<Band> {
+  updateBand(id: number|undefined, band: Band): Observable<Band> {
     return this.http.put<Band>(`${this.api}/${id}`, band);
   }
 
   deleteBand(id: string): Observable<void> {
     return this.http.delete<void>(`${this.api}/${id}`);
+  }
+
+  importExcel(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.upload_api, formData);
   }
 }
