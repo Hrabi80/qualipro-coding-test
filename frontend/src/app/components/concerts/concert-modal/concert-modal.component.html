@@ -1,1 +1,41 @@
-<p>concert-modal works!</p>
+<div class="modal-overlay">
+    <div class="modal-container">
+      <h2 class="modal-title">{{ isEditMode ? 'Modifier un Concert' : 'Créer un Concert' }}</h2>
+  
+      <form [formGroup]="concertForm" (ngSubmit)="submitForm()">
+        
+        <!-- Date Selection -->
+        <div class="form-group">
+          <label for="date">Date du concert</label>
+          <input id="date" type="date" formControlName="date" required />
+        </div>
+  
+        <!-- Hall Selection (Dropdown) -->
+        <div class="form-group">
+          <label for="hall">Sélectionner une Salle</label>
+          <select id="hall" formControlName="party_hall_id" required>
+            <option *ngFor="let hall of halls" [value]="hall.id">
+              {{ hall.name }}
+            </option>
+          </select>
+        </div>
+  
+        <!-- Bands Selection (Multi-Select Dropdown) -->
+        <div class="form-group">
+          <label for="bands">Sélectionner les Groupes</label>
+          <select id="bands" formControlName="band_ids" multiple required>
+            <option *ngFor="let band of bands" [value]="band.id">
+              {{ band.name }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="modal-actions">
+          <button type="submit" class="btn-save">Sauvegarder</button>
+          <button type="button" class="btn-cancel" (click)="close.emit()">Annuler</button>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  

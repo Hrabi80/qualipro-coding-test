@@ -2,7 +2,8 @@
 
 namespace App\DTO;
 
-class ConcertResponseDto
+
+class ConcertResponseDTO
 {
     public int $id;
     public string $date;
